@@ -1,11 +1,12 @@
 // current error (from what i remember): not registering user input from button
 
 int unit_delay = 250;
-const int led = 5;  // adjust for whatever pin it goes into 
-int buttonRed = 8; // adjust for whatever pin 
+const int led = A4;  // adjust for whatever pin it goes into 
+int buttonRed = 13; // adjust for whatever pin 
 int buttonBlue = 7; // adjust for whatever pin 
-int buttonGreen = 6; // adjust for whatever pin 
-int buttonYellow = 4; // adjust for whatever pin 
+int buttonGreen = 8; // adjust for whatever pin 
+int buttonYellow = 10; // adjust for whatever pin 
+int buzzer = 9;
 int level = -1;
 int randNumber = -1;
 
@@ -17,7 +18,7 @@ void setup() {
   pinMode(buttonBlue, INPUT);
   pinMode(buttonGreen, INPUT);
   pinMode(buttonYellow, INPUT);
-  randomSeed(analogRead(5));
+  randomSeed(analogRead(A5));
 }
 
 void dot()
@@ -279,6 +280,10 @@ void loop() {
     digitalWrite(led, LOW);
     Serial.print("Failure");
     // buzzer mean sound
+    tone(9, 261);
+    delay(1000);
+    noTone(buzzer);
+    delay(500);
     exit(0);
   }
 
@@ -287,6 +292,14 @@ void loop() {
     digitalWrite(led, LOW);
     Serial.print("Success");
     // buzzer happy sound
+    tone(9, 600);
+    delay(500);
+    noTone(buzzer);
+    delay(500);
+    tone(9, 600);
+    delay(500);
+    noTone(buzzer);
+    delay(500);
     exit(0);
   }
 
